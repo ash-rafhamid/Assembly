@@ -1,0 +1,18 @@
+LDA 4000H
+MOV B,A ; initializing B as maximum
+
+LDA 4001H
+CMP B
+JC SKIP1 ; if second < max 
+MOV B,A
+
+SKIP1:
+LDA 4002H
+CMP B
+JC SKIP2 ; if third < max
+MOV B,A
+
+SKIP2:
+MOV A,B
+STA 4003H
+HLT
