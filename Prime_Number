@@ -1,0 +1,54 @@
+MVI A, 09H
+MOV C, A
+
+CPI 00H
+JZ NOT_PRIME
+CPI 01H
+JZ NOT_PRIME
+CPI 02H
+JZ PRIME
+CPI 03H
+JZ PRIME
+
+ANI 01H ; chekcing if its even , if it does then definately its not a prime number
+JZ NOT_PRIME 
+
+MVI B, 03H
+
+LOOP:
+MOV A, C
+CALL DIV
+CPI 00H
+JZ NOT_PRIME
+
+
+INR B ; incrementing B twice as to skipping the even numbrs
+INR B
+
+
+MOV A, B 
+MOV E, C
+CMP E ; Stop checking when divisor >= number
+JC LOOP
+
+PRIME:
+MVI A, 01H
+STA 3001H
+JMP EXIT
+
+NOT_PRIME:
+MVI A, 00H
+STA 3001H
+JMP EXIT
+
+
+DIV:
+CMP B
+JC DIV_END
+SUB B
+JMP DIV
+DIV_END:
+RET
+
+EXIT:
+HLT
