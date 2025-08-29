@@ -1,0 +1,29 @@
+LXI SP,5000H      
+
+LDA 4200H         
+MOV C,A         
+ORA A              
+JZ DONE          
+
+LXI H,4201H       
+
+PUSH_LOOP:
+MOV A,M         
+PUSH PSW           
+INX H           
+DCR C            
+JNZ PUSH_LOOP      
+
+LDA 4200H      
+MOV C,A
+LXI H, 4201H   
+
+POP_LOOP:
+POP PSW            
+MOV M,A         
+INX H              
+DCR C              
+JNZ POP_LOOP      
+
+DONE:
+HLT        
