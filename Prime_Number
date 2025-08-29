@@ -1,4 +1,4 @@
-MVI A, 09H
+MVI A, 07H ; given is 07H 
 MOV C, A
 
 CPI 00H
@@ -22,9 +22,10 @@ CPI 00H
 JZ NOT_PRIME
 
 
+
+
 INR B ; incrementing B twice as to skipping the even numbrs
 INR B
-
 
 MOV A, B 
 MOV E, C
@@ -40,7 +41,6 @@ NOT_PRIME:
 MVI A, 00H
 STA 3001H
 JMP EXIT
-
 
 DIV:
 CMP B
