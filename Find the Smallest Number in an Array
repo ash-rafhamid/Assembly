@@ -1,0 +1,22 @@
+LDA 4200H       
+MOV C, A      
+
+LXI H, 4201H     
+MOV A, M         
+MOV B, A       ; B as smallest
+DCR C          ; Decreasing count since first element is already considered
+
+NEXT_SMALLEST:
+INX H           
+MOV A, M         
+CMP B            
+JNC SKIP     ; If A >= B
+MOV B, A        
+
+SKIP:
+DCR C            
+JNZ NEXT_SMALLEST        
+
+MOV A, B        
+STA 4300H  
+HLT             
