@@ -1,0 +1,22 @@
+LDA 2000H                 ;Using n(n+1)/2
+MOV B, A           
+INR A              
+MOV C, A            
+MVI A, 00H        
+
+Multiply: ;n(n+1)
+ADD B              
+DCR C               
+JNZ Multiply          
+
+MVI C, 02H          
+MVI B, 00H         
+
+Divide: ; doing n(n+1)/2
+INR B             
+SUB C               
+JNZ Divide           
+
+MOV A, B           
+STA 201CH  
+HLT
