@@ -1,0 +1,33 @@
+MVI B, 04H        ; number of passes (for 5 elements , n-1)
+
+OUTER_LOOP:
+MOV C, B          ; inner loop count 
+LXI H, 4200H     
+
+INNER_LOOP:
+MOV A, M          
+MOV D, A          ; arr[i]
+INX H            
+MOV A, M          ; arr[i+1]
+CMP D             
+JC SWAP_PAIR      ; if arr[i+1] < arr[i] then swap
+
+NO_SWAP:
+DCR C
+JZ END_PASS
+JMP INNER_LOOP
+
+SWAP_PAIR:
+MOV M, D          ; arr[i+1] = D(arr[i])
+DCX H            
+MOV M, A          ; arr[i] = A(arr[i+1])
+INX H     
+DCR C
+JZ END_PASS
+JMP INNER_LOOP
+
+END_PASS:
+DCR B             
+JNZ OUTER_LOOP  
+
+HLT  
